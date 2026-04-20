@@ -7,19 +7,21 @@ let order = [
   { itemName: "Hash Brown", quantity: 4, unitPricePence: 40 },
 ];
 
-let grandTotal = 0;
-
 console.log("QTY     ITEM                TOTAL");
 
-order.forEach(({ itemName, quantity, unitPricePence }) => {
-  let totalPence = quantity * unitPricePence;
-  let totalPounds = (totalPence / 100).toFixed(2);
+let grandTotal = 0;
+
+// ✅ destructuring + formatting
+for (const { itemName, quantity, unitPricePence } of order) {
+  const totalPence = quantity * unitPricePence;
+  const totalPounds = (totalPence / 100).toFixed(2);
 
   grandTotal += totalPence;
 
   console.log(
-    `${quantity}       ${itemName}           ${totalPounds}`
+    `${String(quantity).padEnd(8)}${itemName.padEnd(20)}${totalPounds}`
   );
-});
+}
 
-console.log(`\nTotal: ${(grandTotal / 100).toFixed(2)}`);
+console.log("=".repeat(35));
+console.log(`TOTAL: ${(grandTotal / 100).toFixed(2)}`);

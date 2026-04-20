@@ -71,8 +71,7 @@ let hogwarts = [
   },
 ];
 
-hogwarts.forEach(({ firstName, lastName, house }) => {
-  if (house === "Gryffindor") {
-    console.log(`${firstName} ${lastName}`);
-  }
-});
+// ✅ destructuring inside loop
+for (const { firstName, lastName, house, pet, occupation } of hogwarts) {
+  console.log(`${firstName} ${lastName} is a ${occupation} from ${house}`);
+}
