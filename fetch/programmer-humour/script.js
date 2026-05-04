@@ -1,5 +1,6 @@
 function fetchComic() {
   const container = document.getElementById("comic-container");
+  const loading = document.getElementById("loading");
 
   fetch("https://xkcd.now.sh/?comic=latest")
     .then(response => {
@@ -11,6 +12,9 @@ function fetchComic() {
     .then(data => {
       console.log(data); // requirement
 
+      // remove loading message
+      if (loading) loading.remove();
+
       container.innerHTML = `
         <h2>${data.title}</h2>
         <img src="${data.img}" alt="${data.alt}" />
@@ -18,7 +22,11 @@ function fetchComic() {
       `;
     })
     .catch(error => {
-      container.innerHTML = `<p>Error loading comic 😢</p>`;
+      if (loading) {
+        loading.textContent = "Error loading comic 😢";
+      } else {
+        container.innerHTML = `<p>Error loading comic 😢</p>`;
+      }
       console.error(error);
     });
 }
